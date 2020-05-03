@@ -27,7 +27,7 @@ Maven home: /usr/share/maven
 ...
 ```
 
-##Installation
+## Installation
 
 Clone this repository with the following command:
 
@@ -38,7 +38,7 @@ git clone https://github.com/nexushamer/portfolio-rest.git
 You can execute this project in local using maven or you can start the service with  
 docker-compose.
 
-##Executing with Maven
+## Executing with Maven
 
 Execute the following command for start the application
 
@@ -46,7 +46,7 @@ Execute the following command for start the application
 mvn spring-boot:run
 ```
 
-##Executing with Docker and Docker-Compose
+## Executing with Docker and Docker-Compose
 
 For start the application with docker-compose you must execute the following command:
 ```bash
@@ -55,7 +55,7 @@ docker-compose up
 This command will be start the MYSQL container and the JAVA container with the
 application, after that you can test the service with any REST Client.
 
-##Testing
+## Testing
 
 For execute the test MAVEN is require, you can execute the test with the following command:
 ```bash
