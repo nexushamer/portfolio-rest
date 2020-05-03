@@ -3,7 +3,7 @@
 This is a REST API for manage the profile of a user, the application consume 
 the Twitter API for get the last tweets of the user.
 
-##Requirements
+## Requirements
 
 - Java8+
 - Maven
@@ -39,6 +39,7 @@ You can execute this project in local using maven or you can start the service w
 docker-compose.
 
 ##Executing with Maven
+
 Execute the following command for start the application
 
 ```bash
@@ -46,6 +47,7 @@ mvn spring-boot:run
 ```
 
 ##Executing with Docker and Docker-Compose
+
 For start the application with docker-compose you must execute the following command:
 ```bash
 docker-compose up
@@ -54,6 +56,7 @@ This command will be start the MYSQL container and the JAVA container with the
 application, after that you can test the service with any REST Client.
 
 ##Testing
+
 For execute the test MAVEN is require, you can execute the test with the following command:
 ```bash
 mvn clean compile verify
