@@ -9,7 +9,6 @@ import com.zemoga.porfolio.core.exceptions.InvalidDataException;
 import com.zemoga.porfolio.core.services.ProfileService;
 import com.zemoga.porfolio.external.datasources.entities.ProfileEntity;
 import com.zemoga.porfolio.external.datasources.repositories.ProfileRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -89,12 +88,12 @@ public class ProfileServiceImplTest {
     }
 
     @Test(expected = InvalidDataException.class)
-    public void whenUpdatingTheProfileAndTheProfileIsNull(){
+    public void whenUpdatingTheProfileAndTheProfileIsNull() {
         profileService.updateProfile(null);
     }
 
     @Test(expected = InvalidDataException.class)
-    public void whenUpdatingTheProfileAndTheUserIdIsEmpty(){
+    public void whenUpdatingTheProfileAndTheUserIdIsEmpty() {
         profileService.updateProfile(new Profile());
     }
 
@@ -107,9 +106,69 @@ public class ProfileServiceImplTest {
         profileService.updateProfile(profile);
     }
 
-    //whenUpdatingTheProfileAndTheExperienceSummaryIsEmpty
-    //whenUpdatingTheProfileAndTheExperienceSummaryIsEmpty
-    //whenUpdatingTheProfileAndTheDataIsOk()
+    //updateProfilePicture
+    @Test(expected = RecordNotFoundException.class)
+    public void whenUpdateProfilePictureAndTheProfileIsNull() {
+        profileService.updateProfilePicture(null,null);
+    }
 
+    @Test(expected = RecordNotFoundException.class)
+    public void whenUpdateProfilePictureAndTheProfileIsEmpty() {
+        profileService.updateProfilePicture(EMPTY, new byte[0]);
+    }
+
+    @Test
+    public void whenUpdateProfilePictureAndTheDataIsOk() {
+        ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setUserId("user01@gmail.com");
+        profileEntity.setNames("Pepe");
+        profileEntity.setLastNames("Gonzales");
+
+        when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
+
+        boolean result = profileService.updateProfilePicture("user01@gmail.com", "datos".getBytes());
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void whenUpdatingTheProfileAndTheDataIsOk() {
+        ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setUserId("user01@gmail.com");
+        profileEntity.setNames("Pepe");
+        profileEntity.setLastNames("Gonzales");
+        profileEntity.setPicture("test".getBytes());
+
+        when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
+
+        Profile profile = new Profile();
+        profile.setUserId("123456");
+        profileService.updateProfile(profile);
+    }
+
+    @Test(expected = InvalidDataException.class)
+    public void whenRetrievingPictureFromProfileAndTheUserIdIsNull() {
+        profileService.retrievePictureFromProfile(null);
+    }
+
+    @Test(expected = InvalidDataException.class)
+    public void whenRetrievingPictureFromProfileAndTheUserIdIsEmpty() {
+        profileService.retrievePictureFromProfile(EMPTY);
+    }
+
+    @Test
+    public void whenRetrievingPictureFromProfileAndThePictureIsReturnWell() {
+        final String userId = "usuario@gmail.com";
+
+        ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setUserId("user01@gmail.com");
+        profileEntity.setNames("Pepe");
+        profileEntity.setLastNames("Gonzales");
+        profileEntity.setPicture("test".getBytes());
+
+        when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
+
+        byte[] picture = profileService.retrievePictureFromProfile(userId);
+        assertNotNull(picture);
+    }
 
 }

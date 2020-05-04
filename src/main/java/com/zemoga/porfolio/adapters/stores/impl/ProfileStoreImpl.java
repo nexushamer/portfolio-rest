@@ -31,15 +31,15 @@ public class ProfileStoreImpl implements ProfileStore {
 
     @Override
     public boolean createProfile(Profile profile) {
-        if(profile == null)
+        if (profile == null)
             throw new RecordNotFoundException(USER_ID_REQUIRED);
 
         ProfileEntity entity = mapper.mapModelToEntity(profile);
 
-        try{
+        try {
             profileRepository.save(entity);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             LOGGER.error(e.getMessage());
         }
 
@@ -61,16 +61,10 @@ public class ProfileStoreImpl implements ProfileStore {
         final Optional<ProfileEntity> profileOptional = profileRepository.findById(userId);
 
         if (profileOptional.isPresent()) {
-            byte[] pictureBytes = profileOptional.get().getPicture();
-
-            if (pictureBytes.length != 0) {
-                return pictureBytes;
-            } else
-                throw new RecordNotFoundException(USER_NOT_FOUND);
+            return profileOptional.get().getPicture();
         } else
             throw new RecordNotFoundException(USER_NOT_FOUND);
     }
-
 
 
     @Override

@@ -4,7 +4,7 @@
   <groupId>com.zemoga.porfolio</groupId>
   <artifactId>portfolio-rest</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>portfolio-rest</name>
   <url>http://maven.apache.org</url>
 
@@ -82,6 +82,7 @@
     </dependency>
   </dependencies>
   <build>
+    <finalName>portfolio-rest</finalName>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
@@ -120,9 +121,6 @@
             <exclude>**/*com/zemoga/porfolio/Application.class</exclude>
             <exclude>**/*com/zemoga/porfolio/ApplicationConfiguration.class</exclude>
             <exclude>**/*com/zemoga/porfolio/external/exceptions/handlers/RestExceptionHandler.class</exclude>
-            <!--
-            <exclude>**/*com/zemoga/porfolio/external/presentation/UsersController.class</exclude>
-            -->
           </excludes>
         </configuration>
         <executions>
