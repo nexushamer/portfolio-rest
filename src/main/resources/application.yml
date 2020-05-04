@@ -10,6 +10,12 @@ spring:
     url: jdbc:mysql://localhost:3306/mysql
     username: root
     password: test
+  social:
+    twitter:
+      appId: KRy7l0v8wex3w8Sy5zThai3Ea
+      appSecret: X2eBm0Y21kYEuR74W3Frqc2JVIizOj8Q1EVGatDsEVVEJo0ucu
+      token: 1220032047516921859-otvXjhExyUTZ5GLxssc9h5ORqtPZja
+      secret: tmJKqM4ORfQW6CH7wIVV8uKNpmSEmeFAP8lYwGb19uYjj
 name: portfolio-rest
 server:
   port: 8081
