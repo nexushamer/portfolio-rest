@@ -3,3 +3,5 @@
 portfolio-rest.iml
 
 target/
+
+ct/node_modules/

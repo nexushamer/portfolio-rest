@@ -1,0 +1,14 @@
+{
+  "name": "records-loader",
+  "version": "1.0.0",
+  "description": "Simple node file for create records at the mysql container",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SAMA",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
