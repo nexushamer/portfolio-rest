@@ -1,6 +1,5 @@
 package com.zemoga.porfolio.external.datasources.entities;
 
-import com.zemoga.porfolio.external.models.Message;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -61,6 +60,7 @@ public class ProfileEntityTest {
         final ProfileEntity profileEntity2 = new ProfileEntity();
         profileEntity2.setUserId("12312213");
         profileEntity2.setPicture(new byte[0]);
+        profileEntity2.setTwitterUserId("usuario01");
 
         final int result1 = profileEntity.hashCode();
         final int result2 = profileEntity2.hashCode();

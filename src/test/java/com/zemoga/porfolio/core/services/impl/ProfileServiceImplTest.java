@@ -18,8 +18,12 @@ import org.mapstruct.factory.Mappers;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.TwitterProfile;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -72,8 +76,46 @@ public class ProfileServiceImplTest {
         profileEntity.setNames("Pepe");
         profileEntity.setLastNames("Gonzales");
 
+        List<Tweet> tweets = new ArrayList<>();
+        Tweet tweet = new Tweet(1, "i was at the fron of ...",new Date(), EMPTY,EMPTY,1L, 1L, "SP", EMPTY);
+
+        tweet.setRetweetCount(0);
+        tweet.setRetweetedStatus(null);
+        tweet.setUser(new TwitterProfile(2, EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,new Date()));
+
+        tweets.add(tweet);
+
         when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
-        when(gateway.consumeService(any())).thenReturn(new ArrayList<>());
+        when(gateway.consumeService(any())).thenReturn(tweets);
+
+        final String userId = "user01@gmail.com";
+        final Profile profile = profileService.retrieveProfile(userId);
+        assertNotNull(profile);
+        assertEquals(profileEntity.getUserId(), profile.getUserId());
+        assertEquals(profileEntity.getNames(), profile.getNames());
+        assertEquals(profileEntity.getLastNames(), profile.getLastNames());
+    }
+
+    @Test
+    public void whenRetrievingTheUserProfileAndTheReponseWasSucessfulTheResponseIsOk() {
+        ProfileEntity profileEntity = new ProfileEntity();
+        profileEntity.setUserId("user01@gmail.com");
+        profileEntity.setNames("Pepe");
+        profileEntity.setLastNames("Gonzales");
+
+        List<Tweet> tweets = new ArrayList<>();
+        Tweet tweet = new Tweet(1, "i was at the fron of ...",new Date(), EMPTY,EMPTY,1L, 1L, "SP", EMPTY);
+        Tweet tweet2 = new Tweet(2, "hide in thethe guard ...",new Date(), EMPTY,EMPTY,12223L, 1123213213L, "SP", EMPTY);
+        tweet2.setUser(new TwitterProfile(5, EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,new Date()));
+
+        tweet.setRetweetCount(1);
+        tweet.setRetweetedStatus(tweet2);
+        tweet.setUser(new TwitterProfile(2, EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,EMPTY,new Date()));
+
+        tweets.add(tweet);
+
+        when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
+        when(gateway.consumeService(any())).thenReturn(tweets);
 
         final String userId = "user01@gmail.com";
         final Profile profile = profileService.retrieveProfile(userId);
