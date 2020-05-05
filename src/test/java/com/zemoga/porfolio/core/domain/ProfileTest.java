@@ -3,6 +3,7 @@ package com.zemoga.porfolio.core.domain;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.junit.Assert.*;
 
 public class ProfileTest {
@@ -35,7 +36,7 @@ public class ProfileTest {
     public void Should_Generate_Same_Hash_Code_Every_Time() {
         final Profile profile = new Profile("usuario@gmail.com", "pepe",
                 "perez", "My experience is",
-                null, StringUtils.EMPTY);
+                null, EMPTY, EMPTY);
 
         final int result1 = profile.hashCode();
         final int result2 = profile.hashCode();

@@ -18,6 +18,6 @@ spring:
       secret: tmJKqM4ORfQW6CH7wIVV8uKNpmSEmeFAP8lYwGb19uYjj
 name: portfolio-rest
 server:
-  port: 8081
+  port: 8088
   servlet:
     contextPath: /portfolio-api

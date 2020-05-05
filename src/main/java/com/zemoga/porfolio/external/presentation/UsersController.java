@@ -34,6 +34,7 @@ public class UsersController {
     }
 
     @GetMapping(path = "/{userId}/profile")
+    @CrossOrigin
     public @ResponseBody
     Profile retrieveProfile(
             @Valid @NotBlank(message = USER_ID_REQUIRED) @PathVariable("userId") String userId) {
@@ -41,6 +42,7 @@ public class UsersController {
     }
 
     @GetMapping(path = "/{userId}/profile/picture")
+    @CrossOrigin
     public ResponseEntity<byte[]> retrieveProfilePicture(@Valid @NotBlank(message = USER_ID_REQUIRED) @PathVariable("userId") String userId) {
         byte[] pictureBytes = profileService.retrievePictureFromProfile(userId);
 
@@ -48,6 +50,7 @@ public class UsersController {
     }
 
     @PutMapping(path = "/{userId}/profile")
+    @CrossOrigin
     public @ResponseBody
     Message updateProfile(@Valid
                           @NotBlank(message = USER_ID_REQUIRED) @PathVariable("userId") String userId,
@@ -64,7 +67,8 @@ public class UsersController {
         return message;
     }
 
-    @PatchMapping(path = "/{userId}/profile/picture")
+    @RequestMapping(value = "/{userId}/profile/picture", method = RequestMethod.PATCH, produces = "application/json", consumes = "multipart/form-data")
+    @CrossOrigin
     public @ResponseBody
     Message updatePictureFromProfile(@PathVariable("userId") String userId,
                                      @RequestParam("profilePicture") MultipartFile file) {

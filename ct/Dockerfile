@@ -10,6 +10,8 @@ RUN npm install --quiet
 
 COPY index.js .
 
+COPY ./pictures/stephen-king.jpg .
+
 EXPOSE 3000
 
 CMD node index.js

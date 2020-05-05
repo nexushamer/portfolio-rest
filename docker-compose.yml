@@ -18,14 +18,16 @@ services:
       - mysql-db
     depends_on:
       - mysql-db
+    restart: unless-stopped
 
   portfolio:
     build: .
     ports:
-      - "8088"
+      - "8088:8088"
     environment:
       - MYSQL_URL=jdbc:mysql://mysql-db:3306/mysql
     links:
       - mysql-db
     depends_on:
       - mysql-db
+    restart: unless-stopped

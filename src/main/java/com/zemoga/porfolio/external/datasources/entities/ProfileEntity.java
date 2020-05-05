@@ -20,8 +20,11 @@ public class ProfileEntity {
     @Column(name = "lastNames", length = 100)
     private String lastNames;
 
-    @Column(name = "experience_summary", length = 500)
+    @Column(name = "experience_summary", length = 5000)
     private String experienceSummary;
+
+    @Column(name = "twitter_user_id", length = 60)
+    private String twitterUserId;
 
     @Lob
     @Column(name = "picture")
