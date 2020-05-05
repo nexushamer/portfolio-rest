@@ -109,9 +109,11 @@ public class ProfileStoreImpl implements ProfileStore {
     private ProfileEntity validAndMapProfileToEntity(Profile profile, ProfileEntity profileEntity) {
         if (!isBlank(profile.getNames()))
             profileEntity.setNames(profile.getNames());
-        else if (!isBlank(profile.getLastNames()))
+
+        if (!isBlank(profile.getLastNames()))
             profileEntity.setLastNames(profile.getLastNames());
-        else if (!isBlank(profile.getExperienceSummary()))
+
+        if (!isBlank(profile.getExperienceSummary()))
             profileEntity.setExperienceSummary(profile.getExperienceSummary());
 
         return profileEntity;

@@ -18,4 +18,5 @@ public class Profile {
     private String experienceSummary;
     private Object tweets;
     private String pictureFileName;
+    private String twitterUser;
 }

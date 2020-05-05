@@ -14,6 +14,9 @@
     <junit.version>4.12</junit.version>
     <commons.lang3.version>3.9</commons.lang3.version>
     <mockito.version>3.2.4</mockito.version>
+    <h2database.version>1.4.194</h2database.version>
+    <pojo.tester.version>0.7.6</pojo.tester.version>
+    <spring.boot.test>2.1.6.RELEASE</spring.boot.test>
   </properties>
 
   <parent>
@@ -31,6 +34,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.social</groupId>
+      <artifactId>spring-social-twitter</artifactId>
+      <version>1.1.0.RELEASE</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
@@ -52,23 +60,23 @@
       <artifactId>commons-lang3</artifactId>
       <version>${commons.lang3.version}</version>
     </dependency>
+    <!-- Depedencies for unit testing and integration testing -->
     <dependency>
       <groupId>pl.pojo</groupId>
       <artifactId>pojo-tester</artifactId>
-      <version>0.7.6</version>
+      <version>${pojo.tester.version}</version>
     </dependency>
-    <!-- Depedencies for unit testing and integration testing -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
-      <version>2.1.6.RELEASE</version>
+      <version>${spring.boot.test}</version>
     </dependency>
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
       <scope>test</scope>
-      <version>1.4.194</version>
+      <version>${h2database.version}</version>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>

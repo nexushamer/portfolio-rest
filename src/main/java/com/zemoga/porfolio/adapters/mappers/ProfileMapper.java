@@ -11,5 +11,6 @@ public interface ProfileMapper {
 
     @Mapping(target = "tweets", ignore = true)
     @Mapping(target = "pictureFileName", ignore = true)
+    @Mapping(target = "twitterUser",source = "twitterUserId")
     Profile mapEntityToModel(ProfileEntity entity);
 }

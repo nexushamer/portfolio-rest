@@ -1,6 +1,7 @@
 package com.zemoga.porfolio.core.services.impl;
 
 import com.zemoga.porfolio.adapters.exceptions.RecordNotFoundException;
+import com.zemoga.porfolio.adapters.gateways.Gateways;
 import com.zemoga.porfolio.adapters.mappers.ProfileMapper;
 import com.zemoga.porfolio.adapters.stores.ProfileStore;
 import com.zemoga.porfolio.adapters.stores.impl.ProfileStoreImpl;
@@ -18,11 +19,13 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -31,6 +34,7 @@ public class ProfileServiceImplTest {
     private ProfileService profileService;
     private ProfileStore profileStore;
     private ProfileRepository profileRepository;
+    private Gateways gateway;
 
     @Spy
     private ProfileMapper profileMapper = Mappers.getMapper(ProfileMapper.class);
@@ -38,8 +42,9 @@ public class ProfileServiceImplTest {
     @Before
     public void setUp() {
         profileRepository = mock(ProfileRepository.class);
+        gateway = mock(Gateways.class);
         profileStore = new ProfileStoreImpl(profileRepository, profileMapper);
-        profileService = new ProfileServiceImpl(profileStore);
+        profileService = new ProfileServiceImpl(profileStore, gateway);
     }
 
     @Test(expected = InvalidDataException.class)
@@ -61,16 +66,6 @@ public class ProfileServiceImplTest {
     }
 
     @Test
-    public void whenRetrievingTheUserProfileAndTheCallActivityIsEmpty() {
-
-    }
-
-    @Test
-    public void whenRetrievingTheUserProfileAndTheCallActivityRetrieveAndError() {
-
-    }
-
-    @Test
     public void whenRetrievingTheUserProfileTheResponseIsOk() {
         ProfileEntity profileEntity = new ProfileEntity();
         profileEntity.setUserId("user01@gmail.com");
@@ -78,6 +73,7 @@ public class ProfileServiceImplTest {
         profileEntity.setLastNames("Gonzales");
 
         when(profileRepository.findById(Mockito.anyString())).thenReturn(Optional.of(profileEntity));
+        when(gateway.consumeService(any())).thenReturn(new ArrayList<>());
 
         final String userId = "user01@gmail.com";
         final Profile profile = profileService.retrieveProfile(userId);
