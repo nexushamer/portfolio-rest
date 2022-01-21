@@ -14,7 +14,7 @@
     <junit.version>4.12</junit.version>
     <commons.lang3.version>3.9</commons.lang3.version>
     <mockito.version>3.2.4</mockito.version>
-    <h2database.version>1.4.194</h2database.version>
+    <h2database.version>2.1.210</h2database.version>
     <pojo.tester.version>0.7.6</pojo.tester.version>
     <spring.boot.test>2.1.6.RELEASE</spring.boot.test>
   </properties>
